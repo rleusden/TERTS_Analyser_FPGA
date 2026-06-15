@@ -29,9 +29,9 @@ In March 1984, the Dutch electronics magazine **Elektuur** published a three-par
 - 300 single-color LEDs
 - Multiplexer ICs, comparators, a CD4060 clock oscillator
 - Several circuitboards
-- Estimated total cost: **300–400 Dutch guilders** (~€310-430 in today's money)
+- Estimated total cost: **300–400 Dutch guilders** (~€430 in today's purchasing power, applying the historical inflation factor)
 
-42 years later, the same functionality can be built for **€16–35**, with RGB LEDs, more display resolution, and digital stability that the analog original could never achieve.
+42 years later, the same functionality can be built for **€45**, with RGB LEDs, higher display resolution, and digital stability that the original analog could never achieve.
 
 ---
 
@@ -51,8 +51,8 @@ In March 1984, the Dutch electronics magazine **Elektuur** published a three-par
 ### Hardware
 - **MCU:** MakerGo ESP32-C3 Super Mini (~€2)
 - **Microphone:** MAX4466 analog electret amplifier (~€1.50)
-- **Display:** 32×16 WS2812B LED matrix, column-oriented zigzag (Serpetine) wiring (~€12)
-- **Total cost:** ~€16
+- **Display:** 32×16 WS2812B LED matrix, column-oriented zigzag (Serpetine) wiring (~€24)
+- **Total cost:** ~€30
 
 ### Audio Input Circuit
 ```
@@ -226,7 +226,7 @@ A **parallel digital filterbank** on an FPGA has no such limitation — just lik
 - **FPGA:** Sipeed Tang Nano 20K (Gowin GW2AR-18, 20,736 LUT4, 48 DSP18×18 blocks)
 - **Microphone:** MAX4466 (proven in v1.0)
 - **Display:** 2× 16×16 WS2812B matrix
-- **Total cost:** ~€35
+- **Total cost:** ~€50
 
 ### Resources required (estimated)
 | Resource | Available | Needed (30 IIR filters) |
