@@ -51,7 +51,7 @@ In March 1984, the Dutch electronics magazine **Elektuur** published a three-par
 ### Hardware
 - **MCU:** MakerGo ESP32-C3 Super Mini (~€2)
 - **Microphone:** MAX4466 analog electret amplifier (~€1.50)
-- **Display:** 32×16 WS2812B LED matrix, column-oriented zigzag (Serpetine) wiring (~€24)
+- **Display:** 32×16 WS2812B LED matrix, column-oriented zigzag (Serpentine) wiring (~€24)
 - **Total cost:** ~€30
 
 ### Audio Input Circuit
@@ -130,9 +130,9 @@ Applied as: `barHeight = bandValues[band] * eq[band] / 100 / AMPLITUDE;`
 > `dcRemoval()`, `windowing()`, `compute()`, `complexToMagnitude()`
 
 ### Intro Animation
-"TERTS" displayed statically on the top row, "Analyser 2026" scrolls left across the bottom row in rainbow colors. FFT starts after the scroll completes.
+"TERTS" is displayed statically on the top row, "Analyzer 2026" scrolls left across the bottom row in rainbow colors. FFT starts after the scroll completes.
 
-Uses a custom `MatrixGFX` class (Adafruit_GFX subclass) with column-oriented zigzag (Serpetine) pixel mapping:
+Uses a custom `MatrixGFX` class (Adafruit_GFX subclass) with column-oriented zigzag (Serpentine) pixel mapping:
 ```cpp
 // Even columns: top → bottom
 // Odd columns:  bottom → top
@@ -312,7 +312,7 @@ The Fourier uncertainty principle is a mathematical law, not an engineering limi
 f_lower = 25 / 2^(1/6) = 22.3 Hz
 f_upper = 25 × 2^(1/6) = 28.1 Hz
 ```
-To resolve 22 Hz in an FFT requires at minimum:
+To resolve 22 Hz in an FFT requires at a minimum:
 ```
 Samples needed = Sample rate / 22 Hz = 44100 / 22 = ~2000 samples
 Sample time    = 2000 / 44100 = 45ms → max 22 FPS
@@ -359,7 +359,7 @@ An analog bandpass filter centered at 25 Hz responds in real time — no accumul
 |---|---|---|
 | ESP32-C3 Super Mini | — | MakerGo or equivalent |
 | MAX4466 module | — | With gain trimmer |
-| WS2812B matrix | 32×16 | Column-oriented zigzag (Serpetine)|
+| WS2812B matrix | 32×16 | Column-oriented zigzag (Serpentine)|
 | Resistor | 2× 100kΩ | DC bias divider |
 | Capacitor | 100nF | DC coupling |
 | Pushbutton | — | Pattern select |
@@ -370,7 +370,7 @@ An analog bandpass filter centered at 25 Hz responds in real time — no accumul
 |---|---|---|
 | Sipeed Tang Nano 20K | — | GW2AR-18 FPGA |
 | MAX4466 module | — | Same as v1.0 |
-| WS2812B matrix | 2× 16×16 | Column-oriented zigzag (Serpetine)|
+| WS2812B matrix | 2× 16×16 | Column-oriented zigzag (Serpentine)|
 | External ADC | TBD | For FPGA audio input |
 | Decoupling caps | 100nF | Per supply pin |
 
@@ -391,6 +391,13 @@ An analog bandpass filter centered at 25 Hz responds in real time — no accumul
   - **Windows or Linux only — no Mac support**
 - Alternative: **APIO** (open-source, Yosys + nextpnr) — less mature for GW2AR-18
 - USB driver: WinUSB via Zadig for BL616 JTAG
+
+### v5.0 — TERTS Analyzer HDMI
+The fourth and final version of the TERTS Analyzer project adds HDMI video output to the v4.0 FPGA implementation, mirroring exactly what Elektuur did in May 1984, when they followed their LED matrix analyzer with a TV output version.
+The HDMI display shows the output of all 30 ISO 1/3-octave bands in color on any modern HDMI monitor or TV at 1280×720 resolution. Each bar is subdivided into 16 sections, each representing a step of approximately 2 dB. The color of each bar changes per section so that the signal level of each band can be read at a glance. This makes the display suitable not only for personal use but also for demonstrations or situations where the analyzer needs to be read from a greater distance.
+Where the original Elektuur TV output version was limited by the low resolution of a PAL composite video signal, v5.0 outputs full HD 1280×720 — allowing wider bars, finer color gradients, peak indicators, frequency labels in Hz, and visual elements that are physically impossible on an LED matrix.
+
+No additional hardware required — the Tang Nano 20K already has a 27 MHz crystal and an onboard MS5351 clock generator specifically for HDMI output. v5.0 is a pure Verilog extension of v4.0.
 
 ---
 
@@ -413,3 +420,4 @@ An analog bandpass filter centered at 25 Hz responds in real time — no accumul
 - [ ] WS2812B output via BL616 RISC-V
 - [ ] v4.0 full system integration
 - [ ] Performance measurement vs. Elektuur 1984 target (213 FPS)
+- [ ] v5.0 HDMI 1280×720 Output
