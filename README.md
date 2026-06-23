@@ -369,7 +369,7 @@ An analog bandpass filter centered at 25 Hz responds in real time — no accumul
 |---|---|---|
 | Sipeed Tang Nano 20K | — | GW2AR-18 FPGA |
 | MAX4466 module | — | Same as v1.0 |
-| WS2812B matrix | 2× 16×16 | Column-oriented zigzag (Serpentine)|
+| HUB75 matrix | 1× 64x32 | Left and Right Channel, 2x 30x32|
 | External ADC | TBD | For FPGA audio input |
 | Decoupling caps | 100nF | Per supply pin |
 
