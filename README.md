@@ -225,7 +225,7 @@ A **parallel digital filterbank** on an FPGA has no such limitation — just lik
 ### Hardware
 - **FPGA:** Sipeed Tang Nano 20K (Gowin GW2AR-18, 20,736 LUT4, 48 DSP18×18 blocks)
 - **Microphone:** MAX4466 (proven in v1.0)
-- **Display:** 2× 16×16 WS2812B matrix
+- **Display:** 1x 64x32 HUB75 matrix
 - **Total cost:** ~€50
 
 ### Resources required (estimated)
@@ -295,8 +295,8 @@ The analog design achieves 213 FPS because the 30 bandpass filters run **continu
 | Aspect | Elektuur 1984 | v1.0 ESP32-C3 | v4.0 Tang Nano 20K |
 |---|---|---|---|
 | Price | ~400 guilders | ~€16 | ~€35 |
-| LEDs | 300 mono | 512 RGB | 512 RGB |
-| Height resolution | 10 pixels | 16 pixels | 16 pixels |
+| LEDs | 300 mono | 512 RGB | 2048 RGB |
+| Height resolution | 10 pixels | 16 pixels | 32 pixels |
 | Bands | 30 ISO terts | 32 logarithmic | 30 ISO terts |
 | Frame rate | 213 FPS | ~76 FPS | >200 FPS (target) |
 | Frequency accuracy | ±1% components | FFT limited | Exact |
