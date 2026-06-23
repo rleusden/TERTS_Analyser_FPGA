@@ -42,7 +42,7 @@ In March 1984, the Dutch electronics magazine **Elektuur** published a three-par
 | v1.0 | Music Analyzer | ESP32-C3 + MAX4466 + 32×16 matrix | ✅ Working |
 | v2.0 | — | ESP32 classic + INMP441 + 32×16 matrix | ❌ Abandoned |
 | v3.0 | — | RP2040 + PCM1808 + 2× 16×16 matrix | ⏭ Skipped |
-| v4.0 | TERTS Analyzer | Tang Nano 20K FPGA + MAX4466 + 2× 16×16 matrix | 🔄 In development |
+| v4.0 | TERTS Analyzer | Tang Nano 20K FPGA + MAX4466 + 1× 64x32 HUB75 matrix | 🔄 In development |
 
 ---
 
@@ -245,10 +245,9 @@ MAX4466 ── ADC (external) ── FPGA
                               │    │   ...
                               │    └── Band 30: 20 kHz
                               │
-                              └── BL616 RISC-V (onboard)
-                                   ├── Peak detection
-                                   ├── LED matrix left  (16×16)
-                                   └── LED matrix right (16×16)
+                              ├── Peak detection
+                              ├── LED matrix left  (30x32)
+                              └── LED matrix right (30x32)
 ```
 
 ### ISO 1/3 Octave Band Center Frequencies
