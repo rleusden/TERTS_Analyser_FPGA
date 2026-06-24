@@ -130,7 +130,7 @@ Applied as: `barHeight = bandValues[band] * eq[band] / 100 / AMPLITUDE;`
 > `dcRemoval()`, `windowing()`, `compute()`, `complexToMagnitude()`
 
 ### Intro Animation
-"TERTS" is displayed statically on the top row, "Analyzer 2026" scrolls left across the bottom row in rainbow colors. FFT starts after the scroll completes.
+"MUSIC" is displayed statically on the top row, "Analyzer 2026" scrolls left across the bottom row in rainbow colors. FFT starts after the scroll completes.
 
 Uses a custom `MatrixGFX` class (Adafruit_GFX subclass) with column-oriented zigzag (Serpentine) pixel mapping:
 ```cpp
@@ -157,7 +157,7 @@ esp_bt_controller_disable();
 - I2S DMA would free the CPU from sampling duty
 
 ### Why it was abandoned
-The INMP441 was **too sensitive for this use case**, with low-frequency noise (vibration, 50Hz hum) permanently lighting up the first 4 bands regardless of AMPLITUDE and NOISE settings. The MAX4466 with its adjustable gain trimmer proved far more practical.
+The INMP441 was **too sensitive for this use case**, with low-frequency noise (vibration, 50Hz hum) permanently lighting up the first 4 bands regardless of AMPLITUDE and NOISE settings. The MAX4466, with its adjustable gain trimmer, proved far more practical.
 
 ### I2S API note (ESP32 Arduino Core v3.x)
 The legacy `driver/i2s.h` API conflicts with ESP-IDF v5.x. Use the new API:
@@ -174,7 +174,7 @@ Sample time (1024 @ 44100Hz) = 23.2ms  → 43 FPS
 FFT compute (ESP32 FPU, float) = 0.2ms → negligible
 LED update (FastLED) = 15ms            → overlaps with DMA on core 1
 ```
-Dual-core ping-pong buffers help but the DMA fill time dominates regardless.
+Dual-core ping-pong buffers help, but the DMA fill time dominates regardless.
 
 ---
 
@@ -220,13 +220,16 @@ You cannot have both high frequency resolution and high frame rate simultaneousl
 | 2048 @ 44.1kHz | 21 Hz | 22 FPS |
 | 4096 @ 44.1kHz | 10 Hz | 11 FPS |
 
-A **parallel digital filterbank** on an FPGA has no such limitation — just like the original analog design, all 30 filters run continuously and simultaneously.
+A **parallel digital filterbank** on an FPGA has no such limitation, just like the original analog design; all 30 filters run continuously and simultaneously.
 
 ### Hardware
 - **FPGA:** Sipeed Tang Nano 20K (Gowin GW2AR-18, 20,736 LUT4, 48 DSP18×18 blocks)
 - **Microphone:** MAX4466 (proven in v1.0)
 - **Display:** 1x 64x32 HUB75 matrix
-- **Total cost:** ~€50
+- **Total cost:** ~€70
+
+### HUB75 advantage over WS2812B on FPGA
+HUB75 works by sliding a row of pixels into a shift register and using a demultiplexer to select the correct row; all 64 pixels of a row are shifted in parallel. This fits perfectly with the FPGA architecture. The FPGA does exactly these kinds of parallel shift operations naturally. The HUB75 displays allow very high refresh rates, whereas the WS2812 refresh rates drop with every LED you add to the strip.
 
 ### Resources required (estimated)
 | Resource | Available | Needed (30 IIR filters) |
