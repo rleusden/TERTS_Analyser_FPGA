@@ -342,7 +342,6 @@ An analog bandpass filter centered at 25 Hz responds in real time — no accumul
 
 ### Why Tang Nano 20K over RP2040 (v3.0 skipped)
 - FPGA fabric implements truly parallel filters — no Fourier bottleneck
-- BL616 RISC-V coprocessor handles LED matrix output
 - Architecturally equivalent to the original analog design
 - One board instead of two
 
@@ -415,11 +414,11 @@ No additional hardware required — the Tang Nano 20K already has a 27 MHz cryst
 - [x] v2.0 attempted and abandoned (INMP441 too sensitive)
 - [x] v3.0 architecture designed but skipped in favor of FPGA approach
 - [x] Tang Nano 20K ordered
-- [ ] Tang Nano 20K arrived
-- [ ] Gowin EDA Pro installed and first blink project working
+- [x] Tang Nano 20K arrived
+- [x] Gowin EDA Pro installed and first blink project working
 - [ ] Single IIR bandpass filter implemented in Verilog
 - [ ] 30-channel parallel filterbank implemented
-- [ ] WS2812B output via BL616 RISC-V
+- [ ] HUB75 output
 - [ ] v4.0 full system integration
 - [ ] Performance measurement vs. Elektuur 1984 target (213 FPS)
 - [ ] v5.0 HDMI 1280×720 Output
